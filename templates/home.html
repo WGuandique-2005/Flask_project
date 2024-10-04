@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #9fa66d;
+      }
+
+      .form-h2 {
+        align-items: center;
+      }
+      .container {
+        width: 300px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .form-label {
+        display: block;
+        margin-bottom: 10px;
+      }
+      .form-input {
+        width: 90%;
+        height: 40px;
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+      .form-input:focus {
+        border-color: #aaa;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .submit-btn {
+        width: 100%;
+        height: 40px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .submit-btn:hover {
+        background-color: #9fcf77;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2 class="form-h2">Login</h2>
+      <form action="/login" method="post">
+        <label for="user_name" class="form-label">Username:</label>
+        <input type="text" id="user_name" name="user_name" class="form-input"><br><br>
+        <label for="contraseña" class="form-label">Password:</label>
+        <input type="password" id="contraseña" name="contraseña" class="form-input" required><br><br>
+        <input type="submit" value="Login" class="submit-btn">
+      </form>
+    </div>
+  </body>
+</html>
