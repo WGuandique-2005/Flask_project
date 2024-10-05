@@ -26,7 +26,6 @@ except mysql.connector.Error as err:
 @app.route("/")
 def index():
     return render_template("home.html")
-
 @app.route("/login", methods=["POST"])
 def login():
     username = request.form["user_name"]
@@ -43,13 +42,44 @@ def login():
         if result:
             hashed_password = result[0].encode('utf-8')
             if bcrypt.checkpw(password.encode('utf-8'), hashed_password):
-                return "Correct executing"#redirect(url_for('gestion'))
+                return redirect(url_for('gestion'))
             else:
+                app.logger.error("Incorret password, try again!")
                 return "Invalid password"
         else:
             return "Invalid username"
     except mysql.connector.Error as err:
         app.logger.error("Error executing query: %s", err)
+        return "Error executing query"
+    finally:
+        cursor.close()
+
+@app.route("/gestion")
+def gestion():
+    return render_template("gestion.html")
+@app.route("/gestionar", methods=["POST"])
+def gestionar():
+    title = request.form.get("titulo")
+    author = request.form.get("autor")
+    genr = request.form.get("genero")
+    editorial = request.form.get("editorial")
+    synopsis = request.form.get("sinopsis")
+    date = request.form.get("fecha_publicacion")
+    status = request.form.get("estado")
+    
+    if not all([title, author, genr, editorial, synopsis, date, status]):
+        app.logger.error("Error: Missing required fields")
+        return "Error: Please fill in all required fields"
+    
+    try:
+        cursor = mysql_conn.cursor()
+        query = "INSERT INTO libro (titulo, autor, genero, editorial, sinopsis, fecha_publicacion, estado) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        cursor.execute(query, (title, author, genr, editorial, synopsis, date, status))
+        mysql_conn.commit()
+        app.logger.info("Book added successfully")
+        return "Libro agregado con éxito"
+    except mysql.connector.Error as error:
+        app.logger.error("Error executing query: %s", error)
         return "Error executing query"
     finally:
         cursor.close()
