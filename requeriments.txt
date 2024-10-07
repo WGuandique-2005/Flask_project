@@ -1,0 +1,5 @@
+Para empezar con nuestro proyecto, necesitaremos instalar las siguientes librerías requeridas:
+
+Flask: Un framework web para Python.
+mysql-connector-python: Un conector para MySQL en Python.
+bcrypt: Una librería para cifrar contraseñas.
