@@ -4,6 +4,7 @@ import bcrypt
 import logging
 
 app = Flask(__name__)
+app.secret_key='admin'
 app.logger.setLevel(logging.DEBUG)
 
 username = 'root'
@@ -39,7 +40,8 @@ def login():
         if result:
             hashed_password = result[0].encode('utf-8')
             if bcrypt.checkpw(password.encode('utf-8'), hashed_password):
-                return redirect(url_for('gestion'))
+                session['logged_in'] = True
+                return redirect(url_for('home'))
             else:
                 app.logger.error("Incorret password, try again!")
                 return "Invalid password"
@@ -51,8 +53,21 @@ def login():
     finally:
         cursor.close()
 
+@app.route("/log_out")
+def log_out():
+    session.pop('logged_in', None)
+    return redirect(url_for('index'))
+
+@app.route("/home")
+def home():
+    if not session.get('logged_in'):
+        return redirect(url_for('index'))
+    return render_template("home.html")
+
 @app.route("/gestion")
 def gestion():
+    if not session.get('logged_in'):
+        return redirect(url_for('index'))
     return render_template("gestion.html")
 @app.route("/gestionar", methods=["POST"])
 def gestionar():

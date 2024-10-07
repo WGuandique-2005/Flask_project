@@ -3,3 +3,60 @@ Para empezar con nuestro proyecto, necesitaremos instalar las siguientes librer�
 Flask: Un framework web para Python.
 mysql-connector-python: Un conector para MySQL en Python.
 bcrypt: Una librería para cifrar contraseñas.
+
+
+from flask import Flask, render_template, request, redirect, url_for, session
+import mysql.connector
+import bcrypt
+import logging
+
+app = Flask(__name__)
+app.secret_key = 'your_secret_key'  # Asegúrate de cambiar esto a una clave secreta segura
+app.logger.setLevel(logging.DEBUG)
+
+# Tu configuración de base de datos y otras configuraciones aquí
+
+@app.route("/login", methods=["POST"])
+def login():
+    username = request.form["user_name"]
+    password = request.form["contraseña"]
+    
+    try:
+        cursor = mysql_conn.cursor()
+        query = "SELECT contraseña FROM usuario WHERE user_name = %s"
+        cursor.execute(query, (username,))
+        result = cursor.fetchone()
+        if result:
+            hashed_password = result[0].encode('utf-8')
+            if bcrypt.checkpw(password.encode('utf-8'), hashed_password):
+                session['logged_in'] = True  # Guarda el estado de inicio de sesión
+                return redirect(url_for('gestion'))
+            else:
+                app.logger.error("Incorrect password, try again!")
+                return "Invalid password"
+        else:
+            return "Invalid username"
+    except mysql.connector.Error as err:
+        app.logger.error("Error executing query: %s", err)
+        return "Error executing query"
+    finally:
+        cursor.close()
+
+@app.route("/gestion")
+def gestion():
+    if not session.get('logged_in'):
+        return redirect(url_for('index'))  # Redirige al login si no está autenticado
+    return render_template("gestion.html")
+
+@app.route("/gestionar", methods=["POST"])
+def gestionar():
+    if not session.get('logged_in'):
+        return redirect(url_for('index'))  # Redirige al login si no está autenticado
+    # Código existente para gestionar libros aquí
+
+@app.route("/logout")
+def logout():
+    session.pop('logged_in', None)  # Elimina el estado de inicio de sesión
+    return redirect(url_for('index'))
+
+# Resto de tu código
