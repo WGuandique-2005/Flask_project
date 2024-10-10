@@ -27,7 +27,7 @@ except mysql.connector.Error as err:
 @app.route("/")
 def index():
     return render_template("login.html")
-@app.route("/login", methods=["PUSH"])
+@app.route("/login", methods=["POST"])
 def login():
     username = request.form["user_name"]
     password = request.form["contraseña"]
