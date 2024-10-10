@@ -23,7 +23,6 @@ except mysql.connector.Error as err:
     app.logger.error("Error de conexión a MySQL: %s", err)
     exit(1)
 
-
 @app.route("/")
 def index():
     return render_template("login.html")
@@ -98,7 +97,6 @@ def gestionar():
 @app.route("/registrarse")
 def registrarse():
     return render_template("sign_up.html")
-
 @app.route("/sign_up", methods=["POST"])
 def reg():
     name = request.form.get("nombre")
