@@ -2,8 +2,10 @@
 
 ## Estudiantes:
 **William Guandique - SMSS076423**
+
 **Alfredo Medrano -SMSS025223**
-** Brisiely Solorzano - SMSS030723 **
+
+**Brisiely Solorzano - SMSS030723**
 
 ### Descripción de la Actividad:
 El proyecto es una aplicación web desarrollada utilizando el framework Flask, diseñada para gestionar una biblioteca.
