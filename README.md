@@ -24,6 +24,6 @@ Puedes instalar estas librerías utilizando pip, el instalador de paquetes de Py
 1. Clonar el repositorio:
    ```bash
    https://github.com/WGuandique-2005/Flask_project.git
-1. Las diapositivas:
+2. Las diapositivas:
    ```bash
    https://www.canva.com/design/DAGS7m4E9NM/jDDiR0NXV8-qbCdpvEh1WA/edit?utm_content=DAGS7m4E9NM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
