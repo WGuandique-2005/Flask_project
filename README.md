@@ -4,6 +4,7 @@
 
 ### Estudiante:
 **William Guandique - SMSS076423**
+Alfredo Medrano -SMSS025223
 
 ### Descripción de la Actividad:
 Tu proyecto es una aplicación web desarrollada utilizando el framework Flask, diseñada para gestionar una biblioteca.
