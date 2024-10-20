@@ -5,6 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
     <link rel="stylesheet" href="/static/css/styles.css">
+    <style>
+        .registro-columns {
+            display: flex;
+            justify-content: space-between;
+        }
+        .registro-column {
+            width: 48%; /* Ajusta el ancho de las columnas */
+        }
+        .registro-form-label {
+            display: block;
+            margin-top: 10px;
+        }
+        .registro-form-input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+        .registro-button-container {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body class="registro-body">
     <div class="registro-container">
@@ -30,7 +52,6 @@
                     
                     <label for="re_pw" class="registro-form-label">Repita la contraseña:</label>
                     <input type="password" id="re_pw" name="re_pw" class="registro-form-input">
-                
                 </div>
             </div>
             <div class="registro-button-container">
